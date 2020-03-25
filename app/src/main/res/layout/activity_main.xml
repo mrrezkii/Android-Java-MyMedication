@@ -1,18 +1,98 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".MainActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="69dp"
+        android:background="@drawable/header_bar"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="17dp"
+            android:layout_weight="5"
+            android:fontFamily="@font/roboto_bold"
+            android:gravity="left"
+            android:text="Hello !"
+            android:textColor="#FFF"
+            android:textSize="10pt" />
+
+        <ImageView
+            android:layout_width="101dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="15dp"
+            android:layout_weight="1"
+            android:src="@drawable/logo_white" />
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto"
+        android:gravity="center_horizontal"
+        android:paddingTop="41dp"
+        android:text="Upcoming Reminder"
+        android:textColor="#000000"
+        android:textSize="16dp"
+        tools:ignore="HardcodedText" />
+
+    <TextView
+        android:id="@+id/idCountdownTimer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto_bold"
+        android:gravity="center_horizontal"
+        android:paddingTop="49dp"
+        android:text="00 : 00 : 00"
+        android:textColor="#000000"
+        android:textSize="36dp"
+        tools:ignore="HardcodedText" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:fontFamily="@font/roboto_light"
+        android:gravity="center_horizontal"
+        android:text="Hour \t\t\t\t\t Mins \t\t\t\t\ Sec"
+        android:textColor="#000000"
+        android:textSize="15dp"
+        tools:ignore="HardcodedText" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="72dp"
+        android:fontFamily="@font/roboto_bold"
+        android:text="Label"
+        android:textColor="#000"
+        android:textSize="16dp" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="112dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/shadow_textview"
+            android:fontFamily="@font/roboto"
+            android:padding="10dp"
+            android:text="@string/loren_ipsum"
+            android:textColor="#000"
+            android:textSize="12dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    
+</LinearLayout>
