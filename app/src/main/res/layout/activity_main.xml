@@ -45,7 +45,7 @@
         tools:ignore="HardcodedText" />
 
     <TextView
-        android:id="@+id/idCountdownTimer"
+        android:id="@+id/tvCountdownTimer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fontFamily="@font/roboto_bold"
@@ -94,5 +94,17 @@
             android:textSize="12dp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <Button
+        android:id="@+id/btn_SetAlarm"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#fff"
+        android:fontFamily="@font/roboto_bold"
+        android:gravity="center"
+        android:text="Set Alarm"
+        android:textColor="@color/colorPrimary"
+        android:textSize="25sp"
+        tools:ignore="HardcodedText" />
     
 </LinearLayout>
