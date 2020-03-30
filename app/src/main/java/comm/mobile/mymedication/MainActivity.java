@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity implements AntaresHTTPAPI.On
 
     private String APIKEY = "004cbd64ff8a7fd4:53c77e7cf8c628fd";
     private String APPNAME = "MyMedication";
-    private String DEVICENAME = "MotorServo";
+    private String DEVICENAME = "KotakObat";
 
 
 
@@ -68,14 +68,14 @@ public class MainActivity extends AppCompatActivity implements AntaresHTTPAPI.On
         btnStop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                antaresAPIHTTP.storeDataofDevice(8443, APIKEY, APPNAME, DEVICENAME, "{\\\"status\\\":1}");
+                antaresAPIHTTP.storeDataofDevice(8443, APIKEY, APPNAME, DEVICENAME, "{\\\"StatusBuzzer\\\":0}");
             }
         });
 
         btnSnooze.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                antaresAPIHTTP.storeDataofDevice(8443, APIKEY, APPNAME, DEVICENAME, "{\\\"status\\\":0}");
+                antaresAPIHTTP.storeDataofDevice(8443, APIKEY, APPNAME, DEVICENAME, "{\\\"StatusBuzzer\\\":1}");
             }
         });
     }
@@ -100,7 +100,7 @@ public class MainActivity extends AppCompatActivity implements AntaresHTTPAPI.On
 
         timePickerDialog = new TimePickerDialog(MainActivity.this,
                 onTimeSetListener, calendar.get(Calendar.HOUR_OF_DAY),
-                calendar.get(Calendar.MINUTE), true);
+                calendar.get(Calendar.MINUTE), false);
         timePickerDialog.setTitle("Set Alarm Time");
 
         timePickerDialog.show();
@@ -122,8 +122,6 @@ public class MainActivity extends AppCompatActivity implements AntaresHTTPAPI.On
 
     @Override
     public void onResponse(AntaresResponse antaresResponse) {
-        // --- Cetak hasil yang didapat dari ANTARES ke System Log --- //
-        //Log.d(TAG,antaresResponse.toString());
         Log.d(TAG, Integer.toString(antaresResponse.getRequestCode()));
         if (antaresResponse.getRequestCode() == 0) {
             try {
