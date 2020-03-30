@@ -67,6 +67,40 @@
         android:textSize="15dp"
         tools:ignore="HardcodedText" />
 
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:orientation="horizontal"
+        android:paddingTop="30dp">
+
+        <Button
+            android:id="@+id/btn_Snooze"
+            android:layout_width="74dp"
+            android:layout_height="35dp"
+            android:layout_gravity="right"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:background="@drawable/second_button"
+            android:fontFamily="@font/roboto_bold_italic"
+            android:text="Snooze"
+            android:textColor="@color/colorAccent" />
+
+        <Button
+            android:id="@+id/btn_Stop"
+            android:layout_width="74dp"
+            android:layout_height="35dp"
+            android:layout_gravity="right"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:background="@drawable/main_button"
+            android:fontFamily="@font/roboto_bold_italic"
+            android:text="STOP"
+            android:textColor="#fff" />
+
+    </LinearLayout>
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -95,16 +129,25 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <Button
-        android:id="@+id/btn_SetAlarm"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#fff"
-        android:fontFamily="@font/roboto_bold"
-        android:gravity="center"
-        android:text="Set Alarm"
-        android:textColor="@color/colorAccent"
-        android:textSize="25sp"
-        tools:ignore="HardcodedText" />
+    <!--    <Button-->
+    <!--        android:id="@+id/btn_SetAlarm"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="match_parent"-->
+    <!--        android:background="#fff"-->
+    <!--        android:fontFamily="@font/roboto_bold"-->
+    <!--        android:gravity="center"-->
+    <!--        android:text="Set Alarm"-->
+    <!--        android:textColor="@color/colorAccent"-->
+    <!--        android:textSize="25sp"-->
+    <!--        tools:ignore="HardcodedText" />-->
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fb_SetAlarm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center"
+        android:layout_margin="16dp"
+        android:background="@color/colorAccent"
+        android:src="@drawable/ic_add_white_24dp" />
     
 </LinearLayout>
