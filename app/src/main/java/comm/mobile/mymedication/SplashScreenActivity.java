@@ -8,7 +8,6 @@ import android.view.WindowManager;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class SplashScreenActivity extends AppCompatActivity {
-
     private int loadingScreen = 4000;
 
     @Override
@@ -25,7 +24,5 @@ public class SplashScreenActivity extends AppCompatActivity {
                 finish();
             }
         }, loadingScreen);
-
-
     }
 }

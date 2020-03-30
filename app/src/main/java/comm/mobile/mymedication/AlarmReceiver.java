@@ -1,6 +1,5 @@
 package comm.mobile.mymedication;
 
-
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -28,7 +27,6 @@ public class AlarmReceiver extends BroadcastReceiver implements AntaresHTTPAPI.O
         antaresAPIHTTP = new AntaresHTTPAPI();
         antaresAPIHTTP.addListener(this);
         antaresAPIHTTP.storeDataofDevice(8443, APIKEY, APPNAME, DEVICENAME, "{\\\"Status\\\":1}");
-
     }
 
     @Override

@@ -42,8 +42,6 @@ public class MainActivity extends AppCompatActivity implements AntaresHTTPAPI.On
     private String APPNAME = "MyMedication";
     private String DEVICENAME = "KotakObat";
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,7 +50,6 @@ public class MainActivity extends AppCompatActivity implements AntaresHTTPAPI.On
         fbSetAlarm = findViewById(R.id.fb_SetAlarm);
         btnStop = findViewById(R.id.btn_Stop);
         btnSnooze = findViewById(R.id.btn_Snooze);
-
 
         antaresAPIHTTP = new AntaresHTTPAPI();
         antaresAPIHTTP.addListener(this);
@@ -81,6 +78,17 @@ public class MainActivity extends AppCompatActivity implements AntaresHTTPAPI.On
         });
     }
 
+    private void openTimePickerDialog(boolean b) {
+        Calendar calendar = Calendar.getInstance();
+
+        timePickerDialog = new TimePickerDialog(MainActivity.this,
+                onTimeSetListener, calendar.get(Calendar.HOUR_OF_DAY),
+                calendar.get(Calendar.MINUTE), false);
+        timePickerDialog.setTitle("Set Alarm Time");
+
+        timePickerDialog.show();
+    }
+
     TimePickerDialog.OnTimeSetListener onTimeSetListener = new TimePickerDialog.OnTimeSetListener() {
 
         @Override
@@ -96,17 +104,6 @@ public class MainActivity extends AppCompatActivity implements AntaresHTTPAPI.On
         }
     };
 
-    private void openTimePickerDialog(boolean b) {
-        Calendar calendar = Calendar.getInstance();
-
-        timePickerDialog = new TimePickerDialog(MainActivity.this,
-                onTimeSetListener, calendar.get(Calendar.HOUR_OF_DAY),
-                calendar.get(Calendar.MINUTE), false);
-        timePickerDialog.setTitle("Set Alarm Time");
-
-        timePickerDialog.show();
-    }
-
     @SuppressLint("SetTextI18n")
     private void setAlarm(Calendar targetCal) {
         tvCountdownTimer.setText(+targetCal.get(Calendar.HOUR) + " : "
@@ -116,16 +113,11 @@ public class MainActivity extends AppCompatActivity implements AntaresHTTPAPI.On
         AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(this, AlarmReceiver.class);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 1, intent, 0);
-
         if (targetCal.before(Calendar.getInstance())) {
             targetCal.add(Calendar.DATE, 1);
         }
-
         alarmManager.setExact(AlarmManager.RTC_WAKEUP, targetCal.getTimeInMillis(), pendingIntent);
-
         Toast.makeText(this, "Alarm aktif!", Toast.LENGTH_LONG).show();
-
-
     }
 
     @Override
