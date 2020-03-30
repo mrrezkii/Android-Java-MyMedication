@@ -3,6 +3,8 @@
     package="comm.mobile.mymedication">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/icon_green"
@@ -10,7 +12,7 @@
         android:roundIcon="@drawable/icon_bg_green_rounded"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ListAlarmActivity"></activity>
+        <activity android:name=".ListAlarmActivity" />
         <activity android:name=".SplashScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -19,6 +21,10 @@
             </intent-filter>
         </activity>
         <activity android:name=".MainActivity" />
+
+        <receiver
+            android:name=".AlarmReceiver"
+            android:process=":remote" />
 
         <meta-data
             android:name="preloaded_fonts"

@@ -111,13 +111,18 @@ public class MainActivity extends AppCompatActivity implements AntaresHTTPAPI.On
         tvCountdownTimer.setText(+targetCal.get(Calendar.HOUR) + " : "
                 + targetCal.get(Calendar.MINUTE) + " : "
                 + targetCal.get(Calendar.SECOND));
-
-        Intent intent = new Intent(getBaseContext(), AlarmReceiver.class);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(
-                getBaseContext(), RQS_1, intent, 0);
+        
         AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-        alarmManager.set(AlarmManager.RTC_WAKEUP, targetCal.getTimeInMillis(),
-                pendingIntent);
+        Intent intent = new Intent(this, AlarmReceiver.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 1, intent, 0);
+
+        if (targetCal.before(Calendar.getInstance())) {
+            targetCal.add(Calendar.DATE, 1);
+        }
+
+        alarmManager.setExact(AlarmManager.RTC_WAKEUP, targetCal.getTimeInMillis(), pendingIntent);
+
+
     }
 
     @Override
