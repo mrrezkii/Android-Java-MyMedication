@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -68,14 +69,14 @@ public class MainActivity extends AppCompatActivity implements AntaresHTTPAPI.On
         btnStop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                antaresAPIHTTP.storeDataofDevice(8443, APIKEY, APPNAME, DEVICENAME, "{\\\"StatusBuzzer\\\":0}");
+                antaresAPIHTTP.storeDataofDevice(8443, APIKEY, APPNAME, DEVICENAME, "{\\\"Status\\\":0}");
             }
         });
 
         btnSnooze.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                antaresAPIHTTP.storeDataofDevice(8443, APIKEY, APPNAME, DEVICENAME, "{\\\"StatusBuzzer\\\":1}");
+                antaresAPIHTTP.storeDataofDevice(8443, APIKEY, APPNAME, DEVICENAME, "{\\\"Status\\\":2}");
             }
         });
     }
@@ -111,7 +112,7 @@ public class MainActivity extends AppCompatActivity implements AntaresHTTPAPI.On
         tvCountdownTimer.setText(+targetCal.get(Calendar.HOUR) + " : "
                 + targetCal.get(Calendar.MINUTE) + " : "
                 + targetCal.get(Calendar.SECOND));
-        
+
         AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(this, AlarmReceiver.class);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 1, intent, 0);
@@ -121,6 +122,8 @@ public class MainActivity extends AppCompatActivity implements AntaresHTTPAPI.On
         }
 
         alarmManager.setExact(AlarmManager.RTC_WAKEUP, targetCal.getTimeInMillis(), pendingIntent);
+
+        Toast.makeText(this, "Alarm aktif!", Toast.LENGTH_LONG).show();
 
 
     }
