@@ -1,4 +1,4 @@
-package comm.mobile.alarmapps;
+package comm.mobile.mymedication;
 
 
 import android.content.BroadcastReceiver;

@@ -18,26 +18,10 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity {
-    //    private Button btnSetAlarm;
     FloatingActionButton fbSetAlarm;
     final static int RQS_1 = 1;
     TimePickerDialog timePickerDialog;
     private TextView tvCountdownTimer;
-    TimePickerDialog.OnTimeSetListener onTimeSetListener = new TimePickerDialog.OnTimeSetListener() {
-
-        @Override
-        public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-
-            Calendar calNow = Calendar.getInstance();
-            Calendar calSet = (Calendar) calNow.clone();
-
-            calSet.set(Calendar.HOUR_OF_DAY, hourOfDay);
-            calSet.set(Calendar.MINUTE, minute);
-            calSet.set(Calendar.SECOND, 0);
-
-            setAlarm(calSet);
-        }
-    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +40,21 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    TimePickerDialog.OnTimeSetListener onTimeSetListener = new TimePickerDialog.OnTimeSetListener() {
+
+        @Override
+        public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+            Calendar calNow = Calendar.getInstance();
+            Calendar calSet = (Calendar) calNow.clone();
+
+            calSet.set(Calendar.HOUR_OF_DAY, hourOfDay);
+            calSet.set(Calendar.MINUTE, minute);
+            calSet.set(Calendar.SECOND, 0);
+
+            setAlarm(calSet);
+        }
+    };
+
     private void openTimePickerDialog(boolean b) {
         Calendar calendar = Calendar.getInstance();
 
@@ -73,8 +72,7 @@ public class MainActivity extends AppCompatActivity {
                 + targetCal.get(Calendar.MINUTE) + " : "
                 + targetCal.get(Calendar.SECOND));
 
-
-        Intent intent = new Intent(getBaseContext(), comm.mobile.alarmapps.AlarmReceiver.class);
+        Intent intent = new Intent(getBaseContext(), AlarmReceiver.class);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(
                 getBaseContext(), RQS_1, intent, 0);
         AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
