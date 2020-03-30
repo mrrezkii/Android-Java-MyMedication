@@ -7,7 +7,9 @@ import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
@@ -15,13 +17,31 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.Calendar;
 
-public class MainActivity extends AppCompatActivity {
+import id.co.telkom.iot.AntaresHTTPAPI;
+import id.co.telkom.iot.AntaresResponse;
+
+
+public class MainActivity extends AppCompatActivity implements AntaresHTTPAPI.OnResponseListener {
     FloatingActionButton fbSetAlarm;
     final static int RQS_1 = 1;
     TimePickerDialog timePickerDialog;
     private TextView tvCountdownTimer;
+    private Button btnStop, btnSnooze;
+
+    private String TAG = "ANTARES-API";
+    private AntaresHTTPAPI antaresAPIHTTP;
+    private String dataDevice;
+
+    private String APIKEY = "004cbd64ff8a7fd4:53c77e7cf8c628fd";
+    private String APPNAME = "MyMedication";
+    private String DEVICENAME = "MotorServo";
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +49,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         tvCountdownTimer = findViewById(R.id.tv_CountdownTimer);
         fbSetAlarm = findViewById(R.id.fb_SetAlarm);
+        btnStop = findViewById(R.id.btn_Stop);
+        btnSnooze = findViewById(R.id.btn_Snooze);
+
+
+        antaresAPIHTTP = new AntaresHTTPAPI();
+        antaresAPIHTTP.addListener(this);
 
         fbSetAlarm.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -36,6 +62,20 @@ public class MainActivity extends AppCompatActivity {
                 //Intent SetAlarm = new Intent(getApplicationContext(), ListAlarmActivity.class);
                 //startActivity(SetAlarm);
                 openTimePickerDialog(false);
+            }
+        });
+
+        btnStop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                antaresAPIHTTP.storeDataofDevice(8443, APIKEY, APPNAME, DEVICENAME, "{\\\"status\\\":1}");
+            }
+        });
+
+        btnSnooze.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                antaresAPIHTTP.storeDataofDevice(8443, APIKEY, APPNAME, DEVICENAME, "{\\\"status\\\":0}");
             }
         });
     }
@@ -78,5 +118,27 @@ public class MainActivity extends AppCompatActivity {
         AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
         alarmManager.set(AlarmManager.RTC_WAKEUP, targetCal.getTimeInMillis(),
                 pendingIntent);
+    }
+
+    @Override
+    public void onResponse(AntaresResponse antaresResponse) {
+        // --- Cetak hasil yang didapat dari ANTARES ke System Log --- //
+        //Log.d(TAG,antaresResponse.toString());
+        Log.d(TAG, Integer.toString(antaresResponse.getRequestCode()));
+        if (antaresResponse.getRequestCode() == 0) {
+            try {
+                JSONObject body = new JSONObject(antaresResponse.getBody());
+                dataDevice = body.getJSONObject("m2m:cin").getString("con");
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        // txtData.setText(dataDevice);
+                    }
+                });
+                Log.d(TAG, dataDevice);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }
